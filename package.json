@@ -1,0 +1,11 @@
+{
+  "name": "skype-log-view",
+  "version": "1.0.0",
+  "description": "Lightweight local viewer for exported Skype logs",
+  "scripts": {
+    "start": "npx --yes serve . -p 3000",
+    "dev": "npx --yes serve . -p 3000"
+  },
+  "keywords": ["skype", "log", "viewer"],
+  "license": "MIT"
+}
