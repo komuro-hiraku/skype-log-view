@@ -2,9 +2,13 @@
   "name": "skype-log-view",
   "version": "1.0.0",
   "description": "Lightweight local viewer for exported Skype logs",
+  "private": true,
   "scripts": {
-    "start": "npx --yes serve . -p 3000",
-    "dev": "npx --yes serve . -p 3000"
+    "start": "bun run server.ts",
+    "dev":   "bun --watch server.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
   },
   "keywords": ["skype", "log", "viewer"],
   "license": "MIT"
