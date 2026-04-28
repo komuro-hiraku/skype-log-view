@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skype Log Viewer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Full-page drop overlay -->
+    <div id="drop-overlay" class="hidden">
+      <div class="drop-message">ここにドロップ</div>
+    </div>
+
+    <!-- Welcome / load screen -->
+    <div id="welcome">
+      <div class="welcome-card">
+        <div class="welcome-logo">💬</div>
+        <h1>Skype Log Viewer</h1>
+        <p class="welcome-desc">
+          Skypeのエクスポートファイル <code>messages.json</code> を読み込んでください
+        </p>
+        <label class="btn-primary" for="file-input">
+          ファイルを選択
+          <input type="file" id="file-input" accept=".json" hidden>
+        </label>
+        <p class="welcome-hint">またはファイルをドラッグ＆ドロップ</p>
+        <details class="welcome-help">
+          <summary>エクスポート方法</summary>
+          <ol>
+            <li>Skype デスクトップアプリを開く</li>
+            <li>プロフィール → 設定 → アカウントとプロフィール</li>
+            <li>「Skypeデータをエクスポート」をクリック</li>
+            <li>ダウンロードした zip を展開して <code>messages.json</code> を選択</li>
+          </ol>
+        </details>
+      </div>
+    </div>
+
+    <!-- Main viewer (hidden until file loaded) -->
+    <div id="viewer" class="hidden">
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-header">
+          <span class="sidebar-title">Skype Log Viewer</span>
+          <button class="icon-btn" id="btn-load" title="別のファイルを開く">📂</button>
+          <input type="file" id="file-input-reload" accept=".json" hidden>
+        </div>
+
+        <div class="sidebar-tabs">
+          <button class="tab active" data-tab="conversations">会話</button>
+          <button class="tab" data-tab="bookmarks">ブックマーク</button>
+        </div>
+
+        <div class="tab-content" id="tab-conversations">
+          <input type="text" id="conv-search" placeholder="会話を検索…" autocomplete="off">
+          <div id="conversation-list"></div>
+        </div>
+
+        <div class="tab-content hidden" id="tab-bookmarks">
+          <div id="bookmark-list"></div>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <div id="main">
+        <div id="toolbar">
+          <h2 id="conversation-title">会話を選択してください</h2>
+          <div class="search-box" id="search-box">
+            <input type="text" id="search-input" placeholder="メッセージを検索…" autocomplete="off">
+            <span id="search-count" class="search-count"></span>
+            <button class="icon-btn" id="btn-search-prev" title="前の結果 (Shift+Enter)">↑</button>
+            <button class="icon-btn" id="btn-search-next" title="次の結果 (Enter)">↓</button>
+            <button class="icon-btn" id="btn-search-clear" title="クリア (Esc)">✕</button>
+          </div>
+        </div>
+
+        <div id="message-container">
+          <div id="messages"></div>
+        </div>
+
+        <div id="no-conversation" class="center-msg">
+          左の会話一覧から会話を選択してください
+        </div>
+      </div>
+
+    </div><!-- /#viewer -->
+  </div><!-- /#app -->
+
+  <script src="app.js"></script>
+</body>
+</html>
